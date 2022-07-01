@@ -1,24 +1,38 @@
+// import java.util.Arrays;
+
+// import javax.lang.model.util.ElementScanner14;
+
 // fine 2 non-repeating no. when others are repeating 2 times.
 
 class NonRepeating_2{
-    public static void main(String args[]){
-        int a[] = {2,3,7,9,11,2,3,11};
+    static void singleNo(int[] a){
+        int[] arr = a;
         int rev = 0;
-        for(int i = 0; i<a.length;i++){
+        for(int i = 0; i<arr.length;i++){
             rev = rev ^ a[i];
         }
-        // rev = ( rev & -rev);
+        rev = rev & ~(rev - 1);
         int temp = rev;
-        int rev1=0;
-        int rev2=0;
-        for(int i=0; i<a.length;i++){
-            if((a[i] & temp ) > 0){
-                rev1 = rev1 ^ a[i];
+        int c =0;
+        int d =0;
+        for(int i=0; i<arr.length;i++){
+            if((arr[i] & temp ) > 0){
+                c = d ^ arr[i];
             }
             else{
-                rev2 = rev2 ^ a[i];
+                d = c ^ arr[i];
             }
         }
-        System.out.println("Two non-repeating no. are: "+ rev1+","+rev2);
+        if(c > d){
+            System.out.println(d + ", " + c);
+        }
+        else{
+            System.out.println(c + "," + d);
+        }
+        
+    }
+    public static void main(String args[] ){
+        int a[] = {2,1,3,2};
+        singleNo(a);
     }
 }
